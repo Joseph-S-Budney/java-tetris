@@ -31,7 +31,6 @@ public class MyGame extends Game  {
         // updating logic
         if(activePiece.update(speed) == false){
             speed -= speed/20;
-            System.out.println(speed);
             //test for row clear here 
             activePiece = new Piece(grid);
             pieces.add(activePiece);
@@ -64,6 +63,9 @@ public class MyGame extends Game  {
         }
         if(ke.getKeyCode() == 38){
             activePiece.rotate();
+        }
+        if(ke.getKeyCode() == 40){
+            activePiece.down();
         }
     }
 

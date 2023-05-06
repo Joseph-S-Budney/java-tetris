@@ -10,11 +10,11 @@ public class Block{
 
     public Block(){
         row = 1;
-        col = 4;
+        col = 5;
     }
     public Block(int rowOffset, int colOffset){
         row = 1+rowOffset;
-        col = 4+colOffset;
+        col = 5+colOffset;
     }
     public void setRow(int row){
         this.row = row;

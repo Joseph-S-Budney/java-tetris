@@ -60,53 +60,17 @@ public class Piece{
         }
     }
     public void rotate(){
-        System.out.println("("+x+","+y+")");
-        for(Block block: blocks){
-            block.setCol(block.getCol());
-            block.setRow(-block.getRow()+y);
+        
+        if(randNum!=4){
+            for(Block block: blocks){
+                int tmpx = block.getCol();
+                int tmpy = block.getRow();
+                grid[block.getRow()][block.getCol()] = null;
+                block.setCol(((0*(tmpx-x))+(1*(tmpy-y)))+x );
+                block.setRow(((-1*(tmpx-x))+(0*(tmpy-y)))+y);
+                grid[block.getRow()][block.getCol()] = block;
+            }
         }
-    }
-    public void iPiece(){
-        blocks.add(new Block(0,0));
-        blocks.add(new Block(0,1));
-        blocks.add(new Block(0,-1));
-        blocks.add(new Block(0,-2));
-    }
-    public void jPiece(){  
-        blocks.add(new Block());
-        blocks.add(new Block(1, 0));
-        blocks.add(new Block(1,1));
-        blocks.add(new Block(1,2));
-    }
-    public void lPiece(){
-        blocks.add(new Block());
-        blocks.add(new Block(1, 0));
-        blocks.add(new Block(1,-1));
-        blocks.add(new Block(1,-2));
-    }
-    public void oPiece(){
-        blocks.add(new Block());
-        blocks.add(new Block(0,1));
-        blocks.add(new Block(1,0));
-        blocks.add(new Block(1,1));
-    }
-    public void sPiece(){
-        blocks.add(new Block());
-        blocks.add(new Block(0,1));
-        blocks.add(new Block(1,0));
-        blocks.add(new Block(1,-1));
-    }
-    public void tPiece(){
-        blocks.add(new Block());
-        blocks.add(new Block(-1,0));
-        blocks.add(new Block(0,-1));
-        blocks.add(new Block(0,1));
-    }
-    public void zPiece(){
-        blocks.add(new Block());
-        blocks.add(new Block(0,-1));
-        blocks.add(new Block(1,0));
-        blocks.add(new Block(1,1));
     }
     public void left(){
         for(Block block: blocks){
@@ -141,5 +105,61 @@ public class Piece{
             x++;
         }
         stop = false;
+    }
+    public void down(){
+        for(Block block: blocks){
+            if(block.getRow() == 20 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) stop = true;
+        }
+        if(stop == false){
+            for(Block block: blocks){
+                grid[block.getRow()][block.getCol()] = null;
+                block.setRow(block.getRow()+1);
+                grid[block.getRow()][block.getCol()] = block;
+            }
+            y++;
+        }
+        stop = false;
+    }
+    public void iPiece(){
+        blocks.add(new Block(0,0));
+        blocks.add(new Block(0,1));
+        blocks.add(new Block(0,-1));
+        blocks.add(new Block(0,-2));
+    }
+    public void jPiece(){  
+        blocks.add(new Block());
+        blocks.add(new Block(-1, -1));
+        blocks.add(new Block(0,-1));
+        blocks.add(new Block(0,1));
+    }
+    public void lPiece(){
+        blocks.add(new Block());
+        blocks.add(new Block(1, -1));
+        blocks.add(new Block(0,-1));
+        blocks.add(new Block(0,1));
+    }
+    public void oPiece(){
+        blocks.add(new Block());
+        blocks.add(new Block(0,-1));
+        blocks.add(new Block(1,0));
+        blocks.add(new Block(1,-1));
+    }
+    public void sPiece(){
+        blocks.add(new Block());
+        blocks.add(new Block(0,1));
+        blocks.add(new Block(1,0));
+        blocks.add(new Block(1,-1));
+    }
+    public void tPiece(){
+        blocks.add(new Block());
+        blocks.add(new Block(-1,0));
+        blocks.add(new Block(0,-1));
+        blocks.add(new Block(0,1));
+    }
+    public void zPiece(){
+        blocks.add(new Block());
+        blocks.add(new Block(0,-1));
+        blocks.add(new Block(1,0));
+        blocks.add(new Block(1,1));
     }
 }
