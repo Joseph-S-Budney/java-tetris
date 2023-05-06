@@ -62,8 +62,8 @@ public class Piece{
     public void rotate(){
         System.out.println("("+x+","+y+")");
         for(Block block: blocks){
-            block.setCol((1*block.getRow()));
-            block.setRow((-1*block.getCol()));
+            block.setCol(block.getCol());
+            block.setRow(-block.getRow()+y);
         }
     }
     public void iPiece(){
