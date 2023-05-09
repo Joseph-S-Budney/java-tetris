@@ -4,18 +4,17 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class Piece{
-    ArrayList<Block> blocks;
-    Color color;
-    int randNum;
-    int x,y;
-    Block[][] grid;
-    long end;
-    long start;
-    float red;
-    float green;
-    float blue;
-    boolean stop;
-    Random rand;
+    private ArrayList<Block> blocks;
+    private int randNum;
+    private int x,y;
+    private Block[][] grid;
+    private long end;
+    private long start;
+    private float red;
+    private float green;
+    private float blue;
+    private boolean stop;
+    private Random rand;
     
     public Piece(Block[][] grid){
         this.grid = grid;
@@ -43,7 +42,7 @@ public class Piece{
         }
         if(end-start>speed){
             for(Block block: blocks){
-                if(block.getRow() == 20 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) return false;
+                if(block.getRow() == grid.length-5 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) return false;
             }
             for(Block block: blocks){
                 grid[block.getRow()][block.getCol()] = null;
@@ -66,8 +65,8 @@ public class Piece{
                 int tmpx = block.getCol();
                 int tmpy = block.getRow();
                 grid[block.getRow()][block.getCol()] = null;
-                block.setCol(((0*(tmpx-x))+(1*(tmpy-y)))+x );
-                block.setRow(((-1*(tmpx-x))+(0*(tmpy-y)))+y);
+                block.setCol(-((0*(tmpx-x))+(1*(tmpy-y)))+x);
+                block.setRow(-((-1*(tmpx-x))+(0*(tmpy-y)))+y);
                 grid[block.getRow()][block.getCol()] = block;
             }
         }
@@ -121,7 +120,7 @@ public class Piece{
         stop = false;
     }
     public void iPiece(){
-        blocks.add(new Block(0,0));
+        blocks.add(new Block()); //This is the block that the piece would rotate around
         blocks.add(new Block(0,1));
         blocks.add(new Block(0,-1));
         blocks.add(new Block(0,-2));
@@ -161,5 +160,8 @@ public class Piece{
         blocks.add(new Block(0,-1));
         blocks.add(new Block(1,0));
         blocks.add(new Block(1,1));
+    }
+    public ArrayList<Block> getBlocks(){
+        return blocks;
     }
 }

@@ -12,28 +12,49 @@ public class MyGame extends Game  {
 
     // declare variables here
 
-    Block[][] grid;
-    Piece activePiece;
-    ArrayList<Piece> pieces;
-    int speed;
+    private Block[][] grid;
+    private Piece activePiece;
+    private ArrayList<Piece> pieces;
+    private int speed;
 
     public MyGame() {
         // initialize variables here
-        grid = new Block[21][10];
+        grid = new Block[25][10];
         activePiece = new Piece(grid);
         pieces = new ArrayList<Piece>();
-        pieces.add(activePiece);
+        pieces.add(0, activePiece);
         speed = 1000;
-        
     }
     
     public void update(){
         // updating logic
+        int rowToCheck = 0;
+        int streak = 0;
+        boolean sentinal = false;
         if(activePiece.update(speed) == false){
             speed -= speed/20;
             //test for row clear here 
             activePiece = new Piece(grid);
             pieces.add(activePiece);
+            for(int blockNum = 0; blockNum<4; blockNum++){
+                rowToCheck = pieces.get(0).getBlocks().get(blockNum).getRow();
+                for(Piece piece: pieces){
+                    for(Block block: piece.getBlocks()){
+                        if(block.getRow() == rowToCheck)streak++;
+                        else{
+                            sentinal = true;
+                            break;
+                        }
+                    }
+                    if(sentinal) break;
+                }
+                if(sentinal) break;
+            }
+            if(streak==10){
+                for(Piece piece: pieces){
+                    if(piece.getBlocks())
+                }
+            }
         }
         activePiece.update(speed);
     }
@@ -42,7 +63,7 @@ public class MyGame extends Game  {
         pen.setColor(Color.GRAY);
         for(int row = 1; row<grid.length; row++){
             for(int col = 0; col<grid[0].length; col++){
-                pen.drawRect((height/23)*col, (height/23)*row, (height/23), (height/23));
+                pen.drawRect((height/26)*col, (height/26)*row, (height/26), (height/26));
             }
         }
         for(Piece piece: pieces){

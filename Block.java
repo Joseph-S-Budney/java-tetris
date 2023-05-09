@@ -3,10 +3,8 @@ import java.awt.Color;
 
 public class Block{
 
-    public int row;
-    public int col;
-    long start;
-    long end;
+    private int row;
+    private int col;
 
     public Block(){
         row = 1;
@@ -30,6 +28,6 @@ public class Block{
     }
     public void draw(Graphics pen, Block grid[][], Color color, int width, int height){
         pen.setColor(color);
-        pen.fillRect((height/23)*col, (height/23)*row, (height/23), (height/23));
+        pen.fillRect((height/26)*col, (height/26)*row, (height/26), (height/26));
     }
 }
