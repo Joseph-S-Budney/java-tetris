@@ -19,7 +19,7 @@ public class MyGame extends Game  {
 
     public MyGame() {
         // initialize variables here
-        grid = new Block[25][10];
+        grid = new Block[21][10];
         activePiece = new Piece(grid);
         pieces = new ArrayList<Piece>();
         pieces.add(0, activePiece);
@@ -29,30 +29,30 @@ public class MyGame extends Game  {
     public void update(){
         // updating logic
         int rowToCheck = 0;
-        int streak = 0;
-        boolean sentinal = false;
         if(activePiece.update(speed) == false){
             speed -= speed/20;
             //test for row clear here 
             activePiece = new Piece(grid);
             pieces.add(activePiece);
-            for(int blockNum = 0; blockNum<4; blockNum++){
-                rowToCheck = pieces.get(0).getBlocks().get(blockNum).getRow();
-                for(Piece piece: pieces){
-                    for(Block block: piece.getBlocks()){
-                        if(block.getRow() == rowToCheck)streak++;
-                        else{
-                            sentinal = true;
+            for(int blockNum = 0; blockNum<pieces.get(0).getBlocks().size(); blockNum++){//remove row
+                    int streak = 0;
+                    boolean removeRow = false;
+                    Block[] toRemove = new Block[10];
+                    rowToCheck = pieces.get(0).getBlocks().get(blockNum).getRow();
+                for(int pieceIndex = 0; pieceIndex<pieces.size(); pieceIndex++){
+                    for(int blockIndex = 0; blockIndex<pieces.get(pieceIndex).getBlocks().size(); blockIndex++){
+                        if(pieces.get(pieceIndex).getBlocks().get(blockIndex).getRow()==rowToCheck && removeRow)pieces.get(pieceIndex).getBlocks().remove(blockIndex);
+                        else if(pieces.get(pieceIndex).getBlocks().get(blockIndex).getRow()==rowToCheck){
+                            toRemove[streak] = pieces.get(pieceIndex).getBlocks().get(blockIndex);
+                            streak++;
+                        }
+                        if(streak==10){
+                            removeRow = true;
+                            streak = 0;
+                            pieceIndex = -1;
                             break;
                         }
                     }
-                    if(sentinal) break;
-                }
-                if(sentinal) break;
-            }
-            if(streak==10){
-                for(Piece piece: pieces){
-                    if(piece.getBlocks())
                 }
             }
         }

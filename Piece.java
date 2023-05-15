@@ -42,7 +42,7 @@ public class Piece{
         }
         if(end-start>speed){
             for(Block block: blocks){
-                if(block.getRow() == grid.length-5 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) return false;
+                if(block.getRow() == grid.length-1 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) return false;
             }
             for(Block block: blocks){
                 grid[block.getRow()][block.getCol()] = null;
