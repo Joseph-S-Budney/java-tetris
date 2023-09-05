@@ -28,6 +28,6 @@ public class Block{
     }
     public void draw(Graphics pen, Block grid[][], Color color, int width, int height){
         pen.setColor(color);
-        pen.fillRect((height/26)*col, (height/26)*row, (height/26), (height/26));
+        pen.fillRect((height/20)*col, (height/20)*row, (height/20), (height/20));
     }
 }

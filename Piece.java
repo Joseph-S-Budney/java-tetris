@@ -42,7 +42,7 @@ public class Piece{
         }
         if(end-start>speed){
             for(Block block: blocks){
-                if(block.getRow() == grid.length-1 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) return false;
+                if(block.getRow() == 19 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) return false;
             }
             for(Block block: blocks){
                 grid[block.getRow()][block.getCol()] = null;
@@ -107,7 +107,7 @@ public class Piece{
     }
     public void down(){
         for(Block block: blocks){
-            if(block.getRow() == 20 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) stop = true;
+            if(block.getRow() == 31 || !(blocks.contains(grid[block.getRow()+1][block.getCol()])) && grid[block.getRow()+1][block.getCol()] != null) stop = true;
         }
         if(stop == false){
             for(Block block: blocks){
